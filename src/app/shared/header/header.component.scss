@@ -5,6 +5,7 @@
     height: 60px;
     position: fixed;
     &__logo{
+        cursor: pointer;
         & img{
             width: 12%;
         }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { Observable, throwError, forkJoin } from 'rxjs';
+import { retry, catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,34 @@ export class PokedexService {
     if(pagination){
       return this.http.get<any>(pagination)
       .pipe(
+        tap(res => {
+          res.results.forEach(element => {          
+            this.GetPokemonByName(element.name).subscribe(e => {
+              Object.keys(e.sprites).forEach(function(k){
+                if(k == 'front_default'){
+                  element.sprite = e.sprites[k];
+                }
+              });
+            });            
+          });
+        }),
         retry(1),
         catchError(this.errorHandl)
       )
     } else {
-      return this.http.get<any>(this.baseurl + '/pokemon/?&offset=0&limit=50')
+      return this.http.get<any>(this.baseurl + '/pokemon/?&offset=0&limit=47')
       .pipe(
+        tap(res => {
+          res.results.forEach(element => {         
+            this.GetPokemonByName(element.name).subscribe(e => {
+              Object.keys(e.sprites).forEach(function(k){
+                if(k == 'front_default'){
+                  element.sprite = e.sprites[k];
+                }
+              });
+            });       
+          });
+        }),
         retry(1),
         catchError(this.errorHandl)
       )

@@ -1,0 +1,11 @@
+.pokedex-list{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    max-width: 100%;
+    & li{
+        width: 14vw;
+    }
+}

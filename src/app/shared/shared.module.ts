@@ -3,20 +3,26 @@ import { CommonModule } from '@angular/common';
 
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
+import { CardPokemonComponent } from './components/card-pokemon/card-pokemon.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CardPokemonComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatCardModule
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CardPokemonComponent,
+    MatCardModule
   ]
 })
 export class SharedModule { }

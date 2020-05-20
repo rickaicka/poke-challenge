@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { PokedexService } from '../services/pokedex.service';
 import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -20,10 +21,12 @@ import { RouterModule } from '@angular/router';
     NgbModule, 
     FontAwesomeModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatCardModule
   ],
   exports: [
-    SharedModule
+    SharedModule,
+    MatCardModule
   ],
   providers:[
     PokedexService
