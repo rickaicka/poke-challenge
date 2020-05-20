@@ -1,0 +1,15 @@
+@import '../../../assets/sass/base/functions';
+
+.header-pokedex{
+    background-color: $primary-red;
+    height: 60px;
+    position: fixed;
+    &__logo{
+        & img{
+            width: 12%;
+        }
+        & h2{
+            @include textStyle(18px, $white, 500, unset);
+        }
+    }
+}

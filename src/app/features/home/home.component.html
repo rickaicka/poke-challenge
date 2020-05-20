@@ -1,0 +1,16 @@
+<div class="container-fluid" style="height: 2000px;">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Teste</h2>
+            <ul>
+                <li *ngFor="let pok of pokemons.results">
+                    <a [routerLink]="['/pokemon', pok.name]">{{pok.name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary float-left" (click)="PreviousPokemons()">Voltar</button>
+            <button class="btn btn-danger float-left" (click)="NextPokemons()">Proximo</button>
+        </div>
+    </div>
+</div>
