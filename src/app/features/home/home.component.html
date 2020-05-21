@@ -1,16 +1,7 @@
-<div class="container-fluid" style="height: 2000px;">
-    <div class="row">
-        <div class="col-md-12">            
-            <h2>Teste</h2>
-        </div>
-    </div>
+<div class="container-fluid home-pokedex">
     <div class="row">
         <div class="col-md-12">
-            <app-card-pokemon [pokemons]="pokemons.results" ></app-card-pokemon>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-primary float-left" (click)="PreviousPokemons()">Voltar</button>
-            <button class="btn btn-danger float-left" (click)="NextPokemons()">Proximo</button>
+            <app-card-pokemon [pokemons]="pokemons"></app-card-pokemon>
         </div>
     </div>
 </div>

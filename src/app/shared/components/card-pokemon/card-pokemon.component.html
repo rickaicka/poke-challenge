@@ -1,27 +1,46 @@
 <ul class="pokedex-list ml-0 mr-0 pl-2 pr-0">
-    <li *ngFor="let pok of pokemons" class="mb-4">
-        <mat-card class="pokedex-list__card-pokemon mr-2">
-            <mat-card-header class="ml-0">
-                <mat-card-title>{{ pok?.name }}</mat-card-title>
-                <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image class="card-pokemon__image" [src]="pok?.sprite" alt="Photo of a Shiba Inu">
-            <mat-card-actions class="card-pokemon__actions">
-                <button mat-button>LIKE</button>
-                <button mat-button>SHARE</button>
-            </mat-card-actions>
-            <mat-card-content class="card-pokemon__content">
-                <p>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
+    <li *ngFor="let pok of pokemons.results" class="pokedex-list__item mb-4">
+        <mat-card class="pokedex-list__item__card-pokemon mr-2 px-0 pb-3">
+            <div class="pokedex-list__item__card-pokemon__header px-3">
+                <h3>{{ pok?.name }}</h3>
+                <app-type-pokemon *ngFor="let type of pok?.types;" [typePokemon]="type.type.name"></app-type-pokemon>
+            </div>
+            <div class="pokedex-list__item__card-pokemon__image">
+                <img mat-card-image [src]="pok?.sprite" alt="{{pok?.name}}">
+            </div>
+            <mat-card-content class="pokedex-list__item__card-pokemon__content">
+                <p class="text-center">
+                    #{{pok?.id | number:'3.0-0'}}
                 </p>
             </mat-card-content>
+            <div class="pokedex-list__item__card-pokemon__details">
+                <button mat-mini-fab color="warn" [routerLink]="['/pokemon', pok?.name]">
+                    <i class="material-icons">loupe</i>
+                </button>
+              </div>
         </mat-card>
     </li>
-    <li class="pokedex-list__next-page">
-        <mat-card class="pokedex-list__card-pokemon mr-2">
-           
+    <!-- <li class="pokedex-list__next-page  mb-4">
+        <mat-card class="pokedex-list__next-page__card-pokemon mr-2">
+           <div class="pokedex-list__next-page__card-pokemon__actions">
+               <ul>
+                   <li class="pokedex-list__next-page__card-pokemon__actions--prev" *ngIf="prevPage">
+                       <p (click)="PreviousPokemons()">
+                           <i class="fa fa-arrow-circle-left mr-2"></i>
+                           Voltar
+                        </p>
+                   </li>
+                   <li class="pokedex-list__next-page__card-pokemon__actions__img">
+                       <img src="./assets/img/colored-pokeball.png" alt="Pokedex Challenge">
+                  </li>
+                   <li class="pokedex-list__next-page__card-pokemon__actions--next">
+                       <p (click)="NextPokemons()">
+                           Próximo
+                           <i class="fa fa-arrow-circle-right ml-2"></i>
+                        </p>
+                   </li>
+               </ul>
+           </div>
         </mat-card>
-    </li>
+    </li> -->
 </ul>

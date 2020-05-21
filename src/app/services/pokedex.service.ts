@@ -9,29 +9,12 @@ import { retry, catchError, tap } from 'rxjs/operators';
 export class PokedexService {
 
   baseurl = 'http://pokeapi.co/api/v2';
+  private limitPerPage = 48;
 
   constructor(private http: HttpClient) { }
 
   GetPokemons(pagination?): Observable<any> {
-    if(pagination){
-      return this.http.get<any>(pagination)
-      .pipe(
-        tap(res => {
-          res.results.forEach(element => {          
-            this.GetPokemonByName(element.name).subscribe(e => {
-              Object.keys(e.sprites).forEach(function(k){
-                if(k == 'front_default'){
-                  element.sprite = e.sprites[k];
-                }
-              });
-            });            
-          });
-        }),
-        retry(1),
-        catchError(this.errorHandl)
-      )
-    } else {
-      return this.http.get<any>(this.baseurl + '/pokemon/?&offset=0&limit=47')
+      return this.http.get<any>((pagination ? pagination : this.baseurl + '/pokemon/?&offset=0&limit=' + this.limitPerPage))
       .pipe(
         tap(res => {
           res.results.forEach(element => {         
@@ -41,13 +24,14 @@ export class PokedexService {
                   element.sprite = e.sprites[k];
                 }
               });
+              element.id = e.id;
+              element.types = this.reverseTypes(e.types);
             });       
           });
         }),
         retry(1),
         catchError(this.errorHandl)
-      )
-    }    
+      ) 
   }
 
   GetPokemonByName(name: string): Observable<any>{
@@ -56,6 +40,10 @@ export class PokedexService {
         retry(1),
         catchError(this.errorHandl)
       )
+  }
+
+  reverseTypes(types){
+    return types.slice().reverse();
   }
 
   errorHandl(error) {

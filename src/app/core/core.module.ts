@@ -7,7 +7,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { PokedexService } from '../services/pokedex.service';
-import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 
 
@@ -21,12 +20,10 @@ import { MatCardModule } from '@angular/material/card';
     NgbModule, 
     FontAwesomeModule,
     HttpClientModule,
-    RouterModule,
     MatCardModule
   ],
   exports: [
     SharedModule,
-    MatCardModule
   ],
   providers:[
     PokedexService

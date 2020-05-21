@@ -18,23 +18,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.pokedexService.GetPokemons().subscribe((data: any) => {
-      console.log(data)
       this.pokemons = data;
     });
-  }
-
-  NextPokemons(){
-    if(this.pokemons){
-      this.pokedexService.GetPokemons(this.pokemons.next).subscribe((data: any) => {
-        this.pokemons = data;
-      });
-    }
-  }
-  PreviousPokemons(){
-    if(this.pokemons){
-      this.pokedexService.GetPokemons(this.pokemons.previous).subscribe((data: any) => {
-        this.pokemons = data;
-      });
-    }
   }
 }
