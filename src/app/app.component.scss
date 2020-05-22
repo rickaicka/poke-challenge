@@ -1,5 +1,8 @@
 .router-main{
-    margin-top: 60px;
+    margin-top: 6vw;
+    @media screen and (min-width: 1440px) {
+        margin-top: 4vw;
+    }
 }
 
 .mat-card-header-text {

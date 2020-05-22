@@ -1,7 +1,80 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3 offset-md-1">
-            {{pokemon | json}}
+        <div class="col-md-12">
+            <a [routerLink]="['']">Lista</a>
+        </div>
+    </div>
+    <div class="container-pokemon-detail">
+        <div class="row">
+            <div class="col-md-2 container-pokemon-detail__img">
+                <img [src]="pokemon?.sprites" class="img-fluid img-thumbnail" alt="{{pokemon?.name}}">
+            </div>
+            <div class="col-md-2 container-pokemon-detail__name-type">
+                <h2 class="container-pokemon-detail__name-type__name m-0" [ngClass]="pokemon?.typeClass">{{pokemon?.name}}</h2>      
+                <div class="container-pokemon-detail__name-type__type">
+                    <app-type-pokemon *ngFor="let type of pokemon?.types;" [typePokemon]="type.type.name"></app-type-pokemon>
+                </div>
+                <div class="container-pokemon-detail__name-type__infos mt-2">
+                    <span class="container-pokemon-detail__name-type__infos__number"> <i>#</i> {{pokemon?.id | number:'3.0-0'}}</span>
+                    <span class="container-pokemon-detail__name-type__infos__weight-height" *ngIf="pokemon?.weight >= 100">{{pokemon?.weight | number:'3.2-2'}} kg, {{pokemon?.height}} cm</span>
+                    <span class="container-pokemon-detail__name-type__infos__weight-height" *ngIf="pokemon?.weight < 100">{{pokemon?.weight | number:'2.2-2'}} kg, {{pokemon?.height}} cm</span>
+                </div>  
+            </div>
+            <div class="col-md-3 offset-md-1 container-pokemon-detail__flavor-text">
+                <h2>Description: </h2>
+                <p>{{pokemon?.flavor_text?.flavor_text}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 container-pokemon-detail__tabs mt-3">
+                <mat-tab-group mat-stretch-tabs>
+                    <mat-tab label="Abilities"> 
+                        <div class="container-pokemon-detail__tabs__abilities p-3">
+                            <ul>
+                                <li *ngFor="let ability of pokemon?.abilities" (click)="showPokemonInfo = !showPokemonInfo">
+                                    <h3 class="float-left">
+                                        {{ability?.ability.name}}
+                                    </h3>
+                                    <i class="material-icons float-right">bookmarks</i>
+                                </li>
+                            </ul>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Moves"> 
+                        <div class="container-pokemon-detail__tabs__moves p-3 overflow-auto">
+                            <ul>
+                                <li *ngFor="let move of pokemon?.moves">
+                                    <h3 class="float-left">
+                                        {{move?.move.name}}
+                                    </h3>
+                                    <i class="material-icons float-right">bookmarks</i>
+                                </li>
+                            </ul>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Stats" > 
+                        <div class="container-pokemon-detail__moves--stat p-3">
+                            <ul>
+                                <li *ngFor="let stat of pokemon?.stats">
+                                    <h3 class="float-left">
+                                        {{stat?.stat.name}}
+                                    </h3>
+                                    <mat-progress-bar
+                                        [color]="getClassStat(stat?.stat.name)"
+                                        [mode]="mode"
+                                        [value]="stat?.base_stat"
+                                        [bufferValue]="bufferValue">
+                                    </mat-progress-bar>
+                                </li>
+                            </ul>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+        
+        <div class="container-pokemon-detail--infos float-right" *ngIf="showPokemonInfo">
+
         </div>
     </div>
 </div>

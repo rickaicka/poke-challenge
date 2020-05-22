@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, forkJoin } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { retry, catchError, tap } from 'rxjs/operators';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,9 @@ import { retry, catchError, tap } from 'rxjs/operators';
 export class PokedexService {
 
   baseurl = 'http://pokeapi.co/api/v2';
-  private limitPerPage = 48;
+  private limitPerPage = 50;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private utils: UtilsService) { }
 
   GetPokemons(pagination?): Observable<any> {
       return this.http.get<any>((pagination ? pagination : this.baseurl + '/pokemon/?&offset=0&limit=' + this.limitPerPage))
@@ -19,43 +20,39 @@ export class PokedexService {
         tap(res => {
           res.results.forEach(element => {         
             this.GetPokemonByName(element.name).subscribe(e => {
-              Object.keys(e.sprites).forEach(function(k){
-                if(k == 'front_default'){
-                  element.sprite = e.sprites[k];
-                }
-              });
+              element.sprite = this.utils.filterSprites(e.sprites);
               element.id = e.id;
-              element.types = this.reverseTypes(e.types);
+              element.types = this.utils.reverseTypes(e.types);
             });       
           });
         }),
         retry(1),
-        catchError(this.errorHandl)
+        catchError(this.utils.errorHandl)
       ) 
   }
 
   GetPokemonByName(name: string): Observable<any>{
     return this.http.get<any>(this.baseurl + '/pokemon/' + name)
       .pipe(
+        tap(res => {   
+          res.types = this.utils.reverseTypes(res.types);
+          this.GetFlavorTexts(res.species.url).subscribe(a => {
+            res.flavor_text = a.flavor_text_entries[0]; 
+          });
+        }),
         retry(1),
-        catchError(this.errorHandl)
+        catchError(this.utils.errorHandl)
       )
   }
 
-  reverseTypes(types){
-    return types.slice().reverse();
+  GetFlavorTexts(url): Observable<any>{
+    return this.http.get<any>(url)
+    .pipe(
+      tap(res => {
+        res.flavor_text_entries = res.flavor_text_entries.filter(txt => txt.language.name === 'en')
+      }),
+      retry(1),
+      catchError(this.utils.errorHandl)
+    )
   }
-
-  errorHandl(error) {
-    let errorMessage = '';
-    if(error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
- }
 }

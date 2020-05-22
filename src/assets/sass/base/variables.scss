@@ -28,6 +28,17 @@ $colors:(
     'shadow': #5A5366
 );
 
+$statsColor: (
+    'hp': #78C84F,
+    'attack': rgb(226, 194, 192),
+    'defense': #6F37F8,
+    'special-attack': #F75787,
+    'special-defense':#98D8D8,
+    'speed': #F8D030,
+    'accuracy': #B7A037,
+    'evasion': #A78FF0
+);
+
 @each $name, $color in $colors{
     .#{ $name } {
         background-color: $color;
@@ -39,3 +50,16 @@ $colors:(
     }
 }
 
+@each $name, $color in $colors{
+    .title-type-#{ $name } {
+        color: $color !important;
+    }
+}
+
+@each $name, $color in $statsColor{
+    .mat-type-stats-#{$name}{
+        .mat-progress-bar-fill::after {
+            background-color: $color !important;
+        }
+    }
+}

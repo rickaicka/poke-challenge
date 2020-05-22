@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     previous: '',
     results: []
   };
-  constructor(public pokedexService: PokedexService) { }
+  constructor(private pokedexService: PokedexService) { }
 
   ngOnInit(): void {
     this.pokedexService.GetPokemons().subscribe((data: any) => {

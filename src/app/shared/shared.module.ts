@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {HeaderComponent} from './header/header.component';
@@ -7,6 +7,8 @@ import {MatCardModule} from '@angular/material/card';
 import { TypePokemonComponent } from './components/type-pokemon/type-pokemon.component';
 import { RouterModule } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -19,13 +21,18 @@ import {MatButtonModule} from '@angular/material/button';
     CommonModule,
     MatCardModule,
     RouterModule,
-    MatButtonModule
+    MatTabsModule,
+    MatButtonModule,
+    MatProgressBarModule
   ],
   exports: [
     HeaderComponent,
     CardPokemonComponent,
+    TypePokemonComponent,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule,
+    MatProgressBarModule
   ]
 })
 export class SharedModule { }

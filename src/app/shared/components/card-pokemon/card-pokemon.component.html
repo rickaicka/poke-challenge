@@ -1,6 +1,6 @@
 <ul class="pokedex-list ml-0 mr-0 pl-2 pr-0">
     <li *ngFor="let pok of pokemons.results" class="pokedex-list__item mb-4">
-        <mat-card class="pokedex-list__item__card-pokemon mr-2 px-0 pb-3">
+        <mat-card class="pokedex-list__item__card-pokemon mr-2 px-0 pb-3" [routerLink]="['/pokemon', pok?.name]">
             <div class="pokedex-list__item__card-pokemon__header px-3">
                 <h3>{{ pok?.name }}</h3>
                 <app-type-pokemon *ngFor="let type of pok?.types;" [typePokemon]="type.type.name"></app-type-pokemon>
@@ -10,11 +10,11 @@
             </div>
             <mat-card-content class="pokedex-list__item__card-pokemon__content">
                 <p class="text-center">
-                    #{{pok?.id | number:'3.0-0'}}
+                    <span>#</span> {{pok?.id | number:'3.0-0'}}
                 </p>
             </mat-card-content>
             <div class="pokedex-list__item__card-pokemon__details">
-                <button mat-mini-fab color="warn" [routerLink]="['/pokemon', pok?.name]">
+                <button mat-mini-fab color="warn">
                     <i class="material-icons">loupe</i>
                 </button>
               </div>

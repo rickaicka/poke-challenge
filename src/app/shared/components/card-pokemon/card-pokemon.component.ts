@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { PokedexService } from 'src/app/services/pokedex.service';
 @Component({
   selector: 'app-card-pokemon',
