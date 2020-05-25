@@ -5,7 +5,7 @@ acessar via cmd a pasta e rodar os seguintes comandos:
 
 ```
 - npm install (para instalar as dependências do Node);
-- ng server;
+- ng serve;
 
 ```
 O projeto local rodará na url: http://localhost:4200/
@@ -16,4 +16,3 @@ Tecnologias usadas:
 >- Angular Material;
 >- Angular 9;
 >- Typescript;
->- Redux
