@@ -8,6 +8,7 @@ $scaleValueGrow: 1.3;
     color: $color;
     font-weight: $weight;
     text-transform:  $transform;
+    font-family: 'Raleway' !important;
     @if $isLink{
         text-decoration: none;
     }

@@ -1,7 +1,11 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <a [routerLink]="['']">Lista</a>
+    <div class="row mb-3">
+        <div class="col-md-12 container-pokemon-detail__back">
+            <a [routerLink]="['']" [ngClass]="pokemon?.typeClass" class=" float-left">
+                <i class="fa fa-home"></i> Pokedex 
+            </a> 
+            <i class="pt-1 float-left ml-2" [ngClass]="pokemon?.typeClass"> - </i>
+            <p [ngClass]="pokemon?.typeClass" class="pt-1 float-left ml-2"> {{pokemon?.name}}</p>
         </div>
     </div>
     <div class="container-pokemon-detail">
@@ -9,7 +13,7 @@
             <div class="col-md-2 container-pokemon-detail__img">
                 <img [src]="pokemon?.sprites" class="img-fluid img-thumbnail" alt="{{pokemon?.name}}">
             </div>
-            <div class="col-md-2 container-pokemon-detail__name-type">
+            <div class="mt-3 mt-md-0 col-md-2 container-pokemon-detail__name-type">
                 <h2 class="container-pokemon-detail__name-type__name m-0" [ngClass]="pokemon?.typeClass">{{pokemon?.name}}</h2>      
                 <div class="container-pokemon-detail__name-type__type">
                     <app-type-pokemon *ngFor="let type of pokemon?.types;" [typePokemon]="type.type.name"></app-type-pokemon>
@@ -20,45 +24,21 @@
                     <span class="container-pokemon-detail__name-type__infos__weight-height" *ngIf="pokemon?.weight < 100">{{pokemon?.weight | number:'2.2-2'}} kg, {{pokemon?.height}} cm</span>
                 </div>  
             </div>
-            <div class="col-md-3 offset-md-1 container-pokemon-detail__flavor-text">
+            <div class="mt-3 mt-md-0 col-md-5 offset-md-1 container-pokemon-detail__flavor-text">
                 <h2>Description: </h2>
                 <p>{{pokemon?.flavor_text?.flavor_text}}</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 container-pokemon-detail__tabs mt-3">
-                <mat-tab-group mat-stretch-tabs>
-                    <mat-tab label="Abilities"> 
-                        <div class="container-pokemon-detail__tabs__abilities p-3">
-                            <ul>
-                                <li *ngFor="let ability of pokemon?.abilities" (click)="showPokemonInfo = !showPokemonInfo">
-                                    <h3 class="float-left">
-                                        {{ability?.ability.name}}
-                                    </h3>
-                                    <i class="material-icons float-right">bookmarks</i>
-                                </li>
-                            </ul>
-                        </div>
-                    </mat-tab>
-                    <mat-tab label="Moves"> 
-                        <div class="container-pokemon-detail__tabs__moves p-3 overflow-auto">
-                            <ul>
-                                <li *ngFor="let move of pokemon?.moves">
-                                    <h3 class="float-left">
-                                        {{move?.move.name}}
-                                    </h3>
-                                    <i class="material-icons float-right">bookmarks</i>
-                                </li>
-                            </ul>
-                        </div>
-                    </mat-tab>
+            <div class="col-md-10 container-pokemon-detail__tabs mt-3">
+                <mat-tab-group mat-stretch-tabs #tabGroup (click)="getTabSelected()">
                     <mat-tab label="Stats" > 
-                        <div class="container-pokemon-detail__moves--stat p-3">
-                            <ul>
-                                <li *ngFor="let stat of pokemon?.stats">
-                                    <h3 class="float-left">
-                                        {{stat?.stat.name}}
-                                    </h3>
+                        <div class="container-pokemon-detail__tabs__stats pt-2">
+                            <ul class="container-pokemon-detail__tabs__stats__list list-group">
+                                <li *ngFor="let stat of pokemon?.stats" class="container-pokemon-detail__tabs__stats__list__item list-group-item">
+                                    <p class="float-left">
+                                        {{stat?.stat.nameFormatted}}: <span>{{stat?.base_stat}}</span>
+                                    </p>
                                     <mat-progress-bar
                                         [color]="getClassStat(stat?.stat.name)"
                                         [mode]="mode"
@@ -69,13 +49,95 @@
                             </ul>
                         </div>
                     </mat-tab>
+                    <mat-tab label="Moves"> 
+                        <ngx-simplebar>
+                            <div class="container-pokemon-detail__tabs__moves">
+                                <div class="container-pokemon-detail__infos float-left">
+                                    <mat-accordion>
+                                            <mat-expansion-panel (opened)="panelOpenState = !panelOpenState"
+                                                                (closed)="panelOpenState = panelOpenState"
+                                                                *ngFor="let move of pokemon?.moves" (click)="getMoveDetails(move?.move)"
+                                                                >
+                                                <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    <p>
+                                                        {{move?.move?.name}}
+                                                    </p>
+                                                </mat-panel-title>
+                                                </mat-expansion-panel-header>
+                                                <div class="container-pokemon-detail__infos__stats">
+                                                    <ul class="container-pokemon-detail__infos__stats__list">
+                                                        <li class="container-pokemon-detail__infos__stats__list__item">
+                                                            <span class="title">Type: </span>
+                                                            <app-type-pokemon [typePokemon]="move?.move?.moveDetails?.type.name"></app-type-pokemon>
+                                                        </li>
+                                                        <li class="container-pokemon-detail__infos__stats__list__item mt-2">                                
+                                                            <span class="title">Description: </span>
+                                                            <p class="content">{{move?.move?.moveDetails?.flavorSelected.flavor_text}} </p>
+                                                        </li>
+                                                        <li class="container-pokemon-detail__infos__stats__list__item mt-2">                                
+                                                            <span class="title">Effect: </span>
+                                                            <p class="content">{{move?.move?.moveDetails?.effectSelected.effect}}</p>
+                                                        </li>
+                                                        <li class="container-pokemon-detail__infos__stats__list__item mt-2">
+                                                            <span class="title">Accuracy: </span>
+                                                            <p class="content">{{move?.move?.moveDetails?.accuracy}}</p>
+                                                        </li>
+                                                        <li class="container-pokemon-detail__infos__stats__list__item mt-2">
+                                                            <span class="title">Power: </span>
+                                                            <p class="content">{{ move?.move?.moveDetails?.power}}</p>
+                                                        </li>
+                                                        <li class="container-pokemon-detail__infos__stats__list__item mt-2">
+                                                            <span class="title">PP: </span>
+                                                            <p class="content">{{move?.move?.moveDetails?.pp}}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </mat-expansion-panel>
+                                    </mat-accordion>
+                                </div>
+                            </div>
+                        </ngx-simplebar>
+                    </mat-tab>
+                    <mat-tab label="Abilities"> 
+                        <ngx-simplebar>
+                            <div class="container-pokemon-detail__tabs__abilities">
+                                <div class="container-pokemon-detail__infos float-left">
+                                    <mat-accordion>
+                                        <mat-expansion-panel (opened)="panelOpenState = !panelOpenState"
+                                                            (closed)="panelOpenState = panelOpenState"
+                                                            *ngFor="let ability of pokemon?.abilities" (click)="getAbilityDetails(ability?.ability)"
+                                                            >
+                                            <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <p>
+                                                    {{ability?.ability?.name}}
+                                                </p>
+                                            </mat-panel-title>
+                                            </mat-expansion-panel-header>
+                                            <div class="container-pokemon-detail__infos__stats">
+                                                <ul class="container-pokemon-detail__infos__stats__list">
+                                                    <li class="container-pokemon-detail__infos__stats__list__item">                                
+                                                        <span class="title">Description: </span>
+                                                        <p class="content">{{ability?.ability?.abilityDetails?.flavorSelected.flavor_text}} </p>
+                                                    </li>
+                                                    <li class="container-pokemon-detail__infos__stats__list__item mt-2">                                
+                                                        <span class="title">Effect: </span>
+                                                        <p class="content">{{ability?.ability?.abilityDetails?.effectSelected.effect}}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </mat-expansion-panel>
+                                    </mat-accordion>
+                                </div>
+                            </div>
+                        </ngx-simplebar>
+                    </mat-tab>
                 </mat-tab-group>
             </div>
         </div>
         
-        <div class="container-pokemon-detail--infos float-right" *ngIf="showPokemonInfo">
-
-        </div>
+        
     </div>
 </div>
 

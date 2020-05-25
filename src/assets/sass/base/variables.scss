@@ -1,9 +1,11 @@
-$primary-gray: #e5e5e5;
+$primary-gray: #f2f2f2;
 $second-gray: #686868;
 $white: #ffffff;
 $primary-yellow: #FECA1B;
 $primary-red: #EF5350;
 $primary-blue: #3761A8;
+
+$mqDesk: 1441px;
 
 $colors:( 
     'normal': #A9A878,
@@ -51,7 +53,7 @@ $statsColor: (
 }
 
 @each $name, $color in $colors{
-    .title-type-#{ $name } {
+    .text-type-#{ $name } {
         color: $color !important;
     }
 }

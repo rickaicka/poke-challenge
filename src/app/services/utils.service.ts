@@ -22,12 +22,26 @@ export class UtilsService {
     return filteredSprite;
   }
 
+  filterLanguage(textEntries, language){
+    return textEntries.filter(txt => txt.language.name === language)[0];
+  }
+
   convertDecimeterToCentimeter(dm){
     return dm * 10;
   }
 
   convertHectogramToKilogram(hg){
     return hg / 10;
+  }
+  
+  removeHyphen(text){
+    let formattedText: String;
+    if(text.includes('-')){
+      formattedText = text.split("-").join(" ");
+    } else{
+      formattedText = text;
+    }
+    return formattedText;
   }
 
   errorHandl(error) {

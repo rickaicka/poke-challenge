@@ -9,7 +9,9 @@ import { RouterModule } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-
+import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     RouterModule,
     MatTabsModule,
     MatButtonModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatListModule,
+    MatExpansionModule,
+    SimplebarAngularModule
   ],
   exports: [
     HeaderComponent,
@@ -32,7 +37,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatCardModule,
     MatButtonModule,
     MatTabsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatListModule,
+    MatExpansionModule,
+    SimplebarAngularModule
   ]
 })
 export class SharedModule { }

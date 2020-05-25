@@ -1,7 +1,10 @@
 .router-main{
     margin-top: 6vw;
-    @media screen and (min-width: 1440px) {
+    @media screen and (min-width: 1441px) {
         margin-top: 4vw;
+    }
+    @media screen and (max-width: 375px) {
+        margin-top: 23vw;
     }
 }
 

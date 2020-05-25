@@ -22,7 +22,7 @@ export class PokedexService {
             this.GetPokemonByName(element.name).subscribe(e => {
               element.sprite = this.utils.filterSprites(e.sprites);
               element.id = e.id;
-              element.types = this.utils.reverseTypes(e.types);
+              element.types = e.types;
             });       
           });
         }),
@@ -36,8 +36,14 @@ export class PokedexService {
       .pipe(
         tap(res => {   
           res.types = this.utils.reverseTypes(res.types);
-          this.GetFlavorTexts(res.species.url).subscribe(a => {
-            res.flavor_text = a.flavor_text_entries[0]; 
+          res.moves.forEach(mv => {
+            mv.move.name = this.utils.removeHyphen(mv.move.name);
+          });
+          res.abilities.forEach(ab => {
+            ab.ability.name = this.utils.removeHyphen(ab.ability.name);
+          });
+          res.stats.forEach(st => {
+            st.stat.nameFormatted = this.utils.removeHyphen(st.stat.name);
           });
         }),
         retry(1),
@@ -45,11 +51,36 @@ export class PokedexService {
       )
   }
 
-  GetFlavorTexts(url): Observable<any>{
+  GetFlavorTexts(url){
     return this.http.get<any>(url)
     .pipe(
       tap(res => {
-        res.flavor_text_entries = res.flavor_text_entries.filter(txt => txt.language.name === 'en')
+        res.flavorSelected = this.utils.filterLanguage(res.flavor_text_entries, 'en');
+      }),
+      retry(1),
+      catchError(this.utils.errorHandl)
+    )
+  };
+
+  GetMoveDetails(moveUrl){
+    return this.http.get<any>(moveUrl)
+    .pipe(
+      tap(res => {
+        res.flavorSelected = this.utils.filterLanguage(res.flavor_text_entries, 'en');
+        res.effectSelected = this.utils.filterLanguage(res.effect_entries, 'en');
+        res.nameFormatted = this.utils.removeHyphen(res.name);
+      }),
+      retry(1),
+      catchError(this.utils.errorHandl)
+    )
+  };
+
+  GetAbilityDetails(moveUrl){
+    return this.http.get<any>(moveUrl)
+    .pipe(
+      tap(res => {
+        res.flavorSelected = this.utils.filterLanguage(res.flavor_text_entries, 'en');
+        res.effectSelected = this.utils.filterLanguage(res.effect_entries, 'en');
       }),
       retry(1),
       catchError(this.utils.errorHandl)

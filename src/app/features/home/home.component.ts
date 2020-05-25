@@ -21,4 +21,8 @@ export class HomeComponent implements OnInit {
       this.pokemons = data;
     });
   }
+
+  backToTop(){
+    window.scrollTo(0,0);
+  }
 }
