@@ -23,7 +23,8 @@ import { MatCardModule } from '@angular/material/card';
     MatCardModule
   ],
   exports: [
-    SharedModule
+    SharedModule,
+    BrowserModule
   ],
   providers:[
     PokedexService

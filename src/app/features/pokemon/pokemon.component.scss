@@ -1,4 +1,4 @@
-@import '../../../assets/sass/base/functions';
+@import 'functions';
 .mat-tab-label-content{
     @include textStyle(20px!important, $second-gray!important, 400!important, capitalize!important);
 }
