@@ -9,7 +9,7 @@ import { UtilsService } from './utils.service';
 })
 export class PokedexService {
 
-  baseurl = 'http://pokeapi.co/api/v2';
+  baseurl = 'https://pokeapi.co/api/v2';
   private limitPerPage = 50;
 
   constructor(private http: HttpClient, private utils: UtilsService) { }
