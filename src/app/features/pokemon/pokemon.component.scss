@@ -65,7 +65,7 @@
             }
             &__weight-height{
                 @include textStyle(12px, $second-gray, 400, none);
-                @media screen and (max-width: $mqMobile) {
+                @media screen and (max-width: $mobile) {
                     @include textStyle(14px, $second-gray, 400, none); 
                 }
             }
@@ -154,7 +154,7 @@
         }
         & p{
             @include textStyle(16px, $second-gray, 300, none); 
-            @media screen and (max-width: $mqMobile) {
+            @media screen and (max-width: $mobile) {
                 @include textStyle(14px, $second-gray, 400, none); 
             }
         }

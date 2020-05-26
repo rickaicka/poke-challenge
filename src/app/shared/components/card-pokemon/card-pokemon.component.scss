@@ -9,7 +9,7 @@
     max-width: 100%;
     &__item, &__next-page{
         width: 17vw;
-        @media screen and (max-width: $mqMobile) {
+        @media screen and (max-width: $mobile) {
             width: 44vw;
         }
         &__card-pokemon{
