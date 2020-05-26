@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
-import { BrowserModule } from '@angular/platform-browser';
 registerLocaleData(ptBr)
 
 
@@ -14,7 +13,6 @@ registerLocaleData(ptBr)
     AppComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'poke-challenge' }),
     AppRoutingModule,
     CoreModule
   ],
