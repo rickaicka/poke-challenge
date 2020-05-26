@@ -1,13 +1,8 @@
 const express = require('express');
 const path = require('path');
-
-const app = express();
-
-app.use(express.static(__dirname + '/dist/poke-challenge'));
-
-app.get('/*', function(req,res) {
-    
-res.sendFile(path.join(__dirname+'/dist/poke-challenge/index.html'));
+const ngApp = express();
+ngApp.use(express.static('./dist/poke-challenge'));
+ngApp.get('/*', function (request, response) {
+    response.sendFile(path.join(__dirname, '/dist/poke-challenge/index.html'));
 });
-
-app.listen(process.env.PORT || 8080);
+ngApp.listen(process.env.PORT || 8080);
