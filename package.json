@@ -3,16 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start": "node server.ts",
-    "postinstall": "ng build --aot --prod",
     "dev:ssr": "ng run poke-challenge:serve-ssr",
-    "serve:ssr": "node dist/poke-challenge/main.js",
+    "serve:ssr": "node dist/poke-challenge/browser/main.js",
     "build:ssr": "ng build --prod && ng run poke-challenge:server:production",
-    "prerender": "ng run poke-challenge:prerender"
+    "prerender": "ng run poke-challenge:prerender",
+    "postinstall": "ng run poke-challenge:prerender && npm run serve:ssr --aot --prod"
   },
   "private": true,
   "dependencies": {
@@ -37,7 +37,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "@nguniversal/express-engine": "^9.1.1",
     "bootstrap": "^4.4.0",
-    "express": "^4.17.1",
+    "express": "^4.15.2",
     "font-awesome": "^4.7.0",
     "redux": "^4.0.5",
     "rxjs": "~6.5.4",
@@ -50,10 +50,10 @@
     "@angular/cli": "~9.1.6",
     "@angular/compiler-cli": "~9.1.7",
     "@nguniversal/builders": "^9.1.1",
-    "@types/express": "^4.17.6",
+    "@types/express": "^4.17.0",
+    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -63,7 +63,7 @@
     "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "~5.4.3",
-    "ts-node": "^8.3.0",
+    "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
   }

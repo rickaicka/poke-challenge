@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/poke-challenge",
+            "outputPath": "dist/poke-challenge/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -133,9 +133,9 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/poke-challenge",
+            "outputPath": "dist/poke-challenge/browser",
             "main": "server.ts",
-            "tsConfig": "tsconfig.server.json",
+            "tsConfig": "tsconfig.server.json",            
             "stylePreprocessorOptions": {
               "includePaths": [
                 "./src/assets/sass/base"
@@ -160,21 +160,7 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
             "browserTarget": "poke-challenge:build",
-            "serverTarget": "poke-challenge:server",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "./node_modules/font-awesome/css/font-awesome.css",
-              "./src/assets/sass/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "./src/assets/sass/base"
-              ]
-            }
+            "serverTarget": "poke-challenge:server"
           },
           "configurations": {
             "production": {
