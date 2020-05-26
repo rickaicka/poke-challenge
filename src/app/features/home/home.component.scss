@@ -9,7 +9,7 @@
         &:hover{
             transform: rotate(360deg);
         }
-        @media screen and (max-width: 375px) {
+        @media screen and (max-width: $mqMobile) {
             width: 35px;
             margin-right: 10px;
             margin-bottom: 10px;

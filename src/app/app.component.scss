@@ -3,7 +3,7 @@
     @media screen and (min-width: 1441px) {
         margin-top: 4vw;
     }
-    @media screen and (max-width: 375px) {
+    @media screen and (max-width: $mqMobile) {
         margin-top: 23vw;
     }
 }
