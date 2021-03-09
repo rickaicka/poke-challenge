@@ -23,4 +23,15 @@ export class HomeComponent implements OnInit {
       this.pokemons = data;
     });
   }
+
+  loadPokemon(){
+    if(this.pokemons){
+      this.pokedexService.GetPokemons(this.pokemons.next).subscribe((data: any) => {
+        this.pokemons.next = data.next;
+        data.results.forEach(element => {
+          this.pokemons.results.push(element)
+        });
+      });
+    }
+  }
 }
