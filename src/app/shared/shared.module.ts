@@ -12,12 +12,14 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { SimplebarAngularModule } from 'simplebar-angular';
+import { BtnTopComponent } from './components/btn-top/btn-top.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     CardPokemonComponent,
-    TypePokemonComponent
+    TypePokemonComponent,
+    BtnTopComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { SimplebarAngularModule } from 'simplebar-angular';
     HeaderComponent,
     CardPokemonComponent,
     TypePokemonComponent,
+    BtnTopComponent,
     MatCardModule,
     MatButtonModule,
     MatTabsModule,

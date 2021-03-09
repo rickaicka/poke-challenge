@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { PokedexService } from 'src/app/services/pokedex.service';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-home',
@@ -16,13 +17,10 @@ export class HomeComponent implements OnInit {
   };
   constructor(private pokedexService: PokedexService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    window.scrollTo(0,0);
     this.pokedexService.GetPokemons().subscribe((data: any) => {
       this.pokemons = data;
     });
-  }
-
-  backToTop(){
-    window.scrollTo(0,0);
   }
 }
