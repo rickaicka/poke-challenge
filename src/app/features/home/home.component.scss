@@ -1,0 +1,15 @@
+.btn-renew-pokedex{
+    &-icon{
+        margin-bottom: 10px;
+        box-shadow: none!important;
+        outline: none;
+    }
+    &-txt{
+        margin-left: -20px;
+        position: static;
+        width: 6em;
+        padding: 2px 0;
+        outline: none;
+        margin-bottom: 10px;
+    }
+}

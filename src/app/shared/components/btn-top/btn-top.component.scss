@@ -17,4 +17,8 @@
             margin-bottom: 10px;
         }
     }
+    &.fixed-bottom{
+        left: unset!important;
+        width: 48px;
+    }
 }

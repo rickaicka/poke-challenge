@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  loadPokemon(){
+  loadPokemon(): void{
     if(this.pokemons){
       this.pokedexService.GetPokemons(this.pokemons.next).subscribe((data: any) => {
         this.pokemons.next = data.next;

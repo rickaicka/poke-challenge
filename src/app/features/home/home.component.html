@@ -3,9 +3,15 @@
         <div class="col-md-12">
             <app-card-pokemon [pokemons]="pokemons"></app-card-pokemon>
         </div>
-
-        <div class="col-md-12">
-            <button (click)="loadPokemon()">Load</button>
+    </div>
+    <div class="row d-md-none d-block">
+        <div class="col-md-12 col-4 offset-4">
+            <div (click)="loadPokemon()">
+                <button mat-mini-fab color="warn" class="btn-renew-pokedex-icon">
+                    <i class="material-icons">autorenew</i>
+                </button>
+                <button mat-flat-button color="warn"class="btn-renew-pokedex-txt">More</button>
+            </div>
         </div>
     </div>
 </div>

@@ -21,7 +21,8 @@ export class CardPokemonComponent implements OnInit {
     onWindowScroll() {
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     let max = document.documentElement.scrollHeight;
-    if(pos == max )   {
+    const uA = navigator.userAgent;
+    if(pos == max && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(uA)))   {
       this.NextPokemons()
     }
   }
