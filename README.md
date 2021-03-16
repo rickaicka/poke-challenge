@@ -1,4 +1,4 @@
-# Teste VR-Benefícios
+# Poke-Challenge
 
 Para rodar o projeto, baixar o repositório,
 acessar via cmd a pasta e rodar os seguintes comandos:
