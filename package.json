@@ -34,7 +34,7 @@
     "@nguniversal/express-engine": "^9.1.1",
     "bootstrap": "^4.4.0",
     "cors": "^2.8.5",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "font-awesome": "^4.7.0",
     "redux": "^4.0.5",
     "rxjs": "~6.5.4",
