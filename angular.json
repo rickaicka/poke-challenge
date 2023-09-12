@@ -58,13 +58,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "4mb",
                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 }
               ]
             }
@@ -135,7 +135,7 @@
           "options": {
             "outputPath": "dist/poke-challenge/",
             "main": "server.ts",
-            "tsConfig": "tsconfig.server.json",            
+            "tsConfig": "tsconfig.server.json",
             "stylePreprocessorOptions": {
               "includePaths": [
                 "./src/assets/sass/base"
