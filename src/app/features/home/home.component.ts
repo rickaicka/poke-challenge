@@ -17,19 +17,19 @@ export class HomeComponent implements OnInit {
   };
   constructor(private pokedexService: PokedexService) { }
 
-  ngOnInit(): void {    
-    window.scrollTo(0,0);
+  ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.pokedexService.GetPokemons().subscribe((data: any) => {
       this.pokemons = data;
     });
   }
 
   loadPokemon(): void{
-    if(this.pokemons){
+    if (this.pokemons){
       this.pokedexService.GetPokemons(this.pokemons.next).subscribe((data: any) => {
         this.pokemons.next = data.next;
         data.results.forEach(element => {
-          this.pokemons.results.push(element)
+          this.pokemons.results.push(element);
         });
       });
     }
