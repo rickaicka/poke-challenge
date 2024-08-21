@@ -14,5 +14,6 @@ Tecnologias usadas:
 
 >- HTML5 e SASS;
 >- Angular Material;
->- Angular 9;
 >- Typescript;
+>- Node version: 12.16.3;
+>- Angular version: 9.1.15
